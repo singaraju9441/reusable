@@ -7,7 +7,7 @@ on:
 
 jobs:
   jobs1:
-    uses: singaraju9441/Ansible/blob/main/.github/workflows/demo.yml@main
+    uses: singaraju9441/Ansible/.github/workflows/demo.yml@main
 
   job2:
     runs-on: ubuntu-latest
