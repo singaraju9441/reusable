@@ -6,11 +6,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  jobs1:
+  job1:
     uses: singaraju9441/Ansible/.github/workflows/demo.yml@main
 
   job2:
     runs-on: ubuntu-latest
+    needs: job1
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
