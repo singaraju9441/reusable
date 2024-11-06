@@ -1,0 +1,38 @@
+
+name: determining trigerring event
+on:
+  workflow_dispatch:   
+
+jobs:
+  event-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Determine triggering event
+        run: echo "This workflow was triggered by a '${{ github.event_name }}' event"
+
+  build:
+    needs: event-check  # Ensures build waits for event-check to complete
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Run build
+        run: echo "Building the project..."
+
+  test:
+    needs: build  # Only runs after build completes
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Run tests
+        run: echo "Running tests..."
+
+  deploy:
+    needs: test  # Only runs after test completes
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Deploy
+        run: echo "Deploying the project..."
