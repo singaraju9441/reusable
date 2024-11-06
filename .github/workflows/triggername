@@ -1,9 +1,8 @@
+name: determining triggering event
 
-name: determining trigerring event
 on:
   push:
     branches: [ "main" ]
-
   workflow_dispatch:   
 
 jobs:
@@ -14,7 +13,7 @@ jobs:
         run: echo "This workflow was triggered by a '${{ github.event_name }}' event"
 
   build:
-    needs: event-check  # Ensures build waits for event-check to complete
+    needs: [event-check]  # Waits for event-check to complete
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -23,7 +22,7 @@ jobs:
         run: echo "Building the project..."
 
   test:
-    needs: build  # Only runs after build completes
+    needs: [build]  # Waits for build to complete
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -32,7 +31,7 @@ jobs:
         run: echo "Running tests..."
 
   deploy:
-    needs: test  # Only runs after test completes
+    needs: [test]  # Waits for test to complete
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
