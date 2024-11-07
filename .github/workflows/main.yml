@@ -1,0 +1,14 @@
+
+name: determining triggering event
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:   
+
+jobs:
+  event-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Determine triggering event
+        run: echo "This workflow was triggered by a '${{ github.event_name }}' event"
